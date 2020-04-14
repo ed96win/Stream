@@ -21,6 +21,9 @@ cd httpconf
 wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
 mv live.example.com.http.conf $hostname.http.conf
 sed -i s/live.example.com/$hostname/g $hostname.http.conf
+mkdir /etc/nginx/html/$hostname
+mkdir /etc/nginx/html/$hostname/hls
+mkdir /etc/nginx/html/$hostname/dash
 ufw allow $port
 echo "Your new domain $hostname has been successfully added!
 Now you can send your OBS RTMP stream to rtmp://$hostname:$port/live
