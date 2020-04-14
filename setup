@@ -21,6 +21,7 @@ cd httpconf
 wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
 mv live.example.com.http.conf $hostname.http.conf
 sed -i s/live.example.com/$hostname/g $hostname.http.conf
+ufw allow $port
 echo "Your new domain $hostname has been successfully added!
 Now you can send your OBS RTMP stream to rtmp://$hostname:$port/live
 Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8
@@ -127,7 +128,7 @@ rm pcre-8.43.tar.gz
 rm zlib-1.2.11.tar.gz
 rm nginx
 service nginx restart
-service ufw stop
+ufw allow 1935
 history -c
 clear
 echo "Nginx 1.17.10 (with rtmp module and ffmpeg) has been installed successfully.
