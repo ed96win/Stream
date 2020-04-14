@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -e "\e[32m "'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
+echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
 read hostname
 cd ~
 apt update && apt upgrade -y &&
