@@ -1,4 +1,35 @@
 #!/bin/bash
+service nginx status
+if ([ $? = 0 ] && [[ -d "/etc/nginx" ]]); then
+clear
+echo "nginx detected, adding a new domain"
+echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
+read hostname
+echo "A random port between 1935-5000 will be automatically selected"
+port=$(shuf -i1935-5000 -n1)
+if lsof -Pi :$port -sTCP:LISTEN -t >/dev/null ; then
+port=$(shuf -i1935-5000 -n1)
+fi
+cd /etc/nginx/conf.d
+cd rtmpconf
+wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
+mv live.example.com.rtmp.conf $hostname.rtmp.conf
+sed -i s/live.example.com/$hostname/g $hostname.rtmp.conf
+sed -i s/1935/$port/g $hostname.rtmp.conf
+cd ..
+cd httpconf
+wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
+mv live.example.com.http.conf $hostname.http.conf
+sed -i s/live.example.com/$hostname/g $hostname.http.conf
+echo "Your new domain $hostname has been successfully added!
+Now you can send your OBS RTMP stream to rtmp://$hostname:$port/live
+Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8
+Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
+echo "================================================================================="
+echo "Brought to you by you by Edwin Ramezanloo"
+else
+clear
+echo "Nginx not found, attempting to install"
 echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
 read hostname
 cd ~
@@ -105,3 +136,4 @@ Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u
 Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
 echo "================================================================================="
 echo "Brought to you by you by Edwin Ramezanloo"
+fi
