@@ -99,5 +99,9 @@ service nginx restart
 service ufw stop
 history -c
 clear
-echo -e "\e[32m Nginx 1.17.10 (with rtmp module and ffmpeg) has been installed successfully. \033[0m"
-echo -e "\e[32m "Now you can send your OBS RTMP stream to rtmp://$hostname:1935/live" \033[0m"
+echo "Nginx 1.17.10 (with rtmp module and ffmpeg) has been installed successfully.
+Now you can send your OBS RTMP stream to rtmp://$hostname:1935/live
+Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8
+Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
+echo "================================================================================="
+echo "Brought to you by you by Edwin Ramezanloo"
