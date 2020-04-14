@@ -1,0 +1,103 @@
+#!/bin/bash
+echo -e "\e[32m "'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
+read hostname
+cd ~
+apt update && apt upgrade -y &&
+sudo apt-get install git build-essential libpcre3 libpcre3-dev libssl-dev -y
+sudo apt-get install install zlibc zlib1g zlib1g-dev -y
+sudo apt install libnginx-mod-http-geoip -y
+sudo apt-get install libgeoip-dev -y
+sudo apt install ffmpeg -y
+rm -rf nginx-rtmp-module && rm -rf nginx-1.17.10 && rm -rf zlib-1.2.11 && rm -rf pcre-8.43 
+rm nginx-1.17.10.tar.gz && rm zlib-1.2.11.tar.gz && pcre-8.43.tar.gz
+git clone https://github.com/ed96win/nginx-rtmp-module.git
+wget http://nginx.org/download/nginx-1.17.10.tar.gz
+tar -xvf nginx-1.17.10.tar.gz
+cd ~
+wget http://zlib.net/zlib-1.2.11.tar.gz
+tar -xvf zlib-1.2.11.tar.gz
+cd zlib-1.2.11
+./configure
+make
+sudo make install
+cd ~
+wget https://ftp.pcre.org/pub/pcre/pcre-8.43.tar.gz
+tar -xvf pcre-8.43.tar.gz
+cd pcre-8.43
+./configure
+make
+sudo make install
+cd ~
+cd /usr/src/
+mkdir libmaxminddb
+cd libmaxminddb
+rm libmaxminddb-1.4.2.tar.gz
+wget https://github.com/maxmind/libmaxminddb/releases/download/1.4.2/libmaxminddb-1.4.2.tar.gz
+tar -xvf libmaxminddb-1.4.2.tar.gz libmaxminddb-1.4.2/
+cd libmaxminddb-1.4.2/
+./configure
+make
+make check
+make install
+sudo ldconfig
+cd /usr/src/
+git clone https://github.com/ed96win/ngx_http_geoip2_module.git
+cd ~
+git clone https://github.com/ed96win/headers-more-nginx-module.git
+cd nginx-1.17.10
+./configure --prefix=/etc/nginx --user=nginx --group=nginx --sbin-path=/etc/nginx/sbin/nginx --conf-path=/etc/nginx/nginx.conf --pid-path=/etc/nginx/logs/nginx.pid --with-pcre=../pcre-8.43 --with-zlib=../zlib-1.2.11 --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --add-module=/usr/src/ngx_http_geoip2_module --add-module=../nginx-rtmp-module --add-module=../headers-more-nginx-module
+sudo make && sudo make install
+mkdir /etc/nginx/geoip
+cd /etc/nginx/geoip
+rm GeoLite2-Country.mmdb
+wget edwin.one/shell/GeoLite2-Country.mmdb
+cd ~
+rm -rf *
+rm *
+cd /lib/systemd/system/
+rm nginx.service
+wget https://raw.githubusercontent.com/ed96win/Stream/master/nginx.service
+systemctl daemon-reload
+service nginx stop
+cd /etc/nginx
+rm nginx.conf
+wget https://raw.githubusercontent.com/ed96win/Stream/master/nginx.conf
+rm -rf /etc/nginx/conf.d
+mkdir /etc/nginx/conf.d
+cd /etc/nginx/conf.d
+mkdir rtmpconf
+mkdir httpconf
+cd rtmpconf
+wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
+mv live.example.com.rtmp.conf $hostname.rtmp.conf
+sed -i s/live.example.com/$hostname/g $hostname.rtmp.conf
+cd ..
+cd httpconf
+wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
+mv live.example.com.http.conf $hostname.http.conf
+sed -i s/live.example.com/$hostname/g $hostname.http.conf
+cd ~
+mkdir /etc/nginx/html/$hostname/
+mkdir /etc/nginx/html/$hostname/hls
+mkdir /etc/nginx/html/$hostname/dash
+cd /usr/bin
+echo "" > nginx.conf
+echo "/etc/nginx/sbin/nginx "'$'"1" > nginx
+chmod +x nginx
+sudo adduser nginx --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+cd ~
+rm -rf headers-more-nginx-module
+rm -rf nginx-1.17.10
+rm -rf nginx-rtmp-module
+rm -rf pcre-8.43
+rm -rf zlib-1.2.11
+rm nginx-1.17.10.tar.gz
+rm pcre-8.43.tar.gz
+rm zlib-1.2.11.tar.gz
+rm nginx
+service nginx restart
+service ufw stop
+history -c
+clear
+echo -e "\e[32m Nginx 1.17.10 (with rtmp module and ffmpeg) has been installed successfully. \033[0m"
+echo -e "\e[32m "Now you can send your OBS RTMP stream to rtmp://$hostname:1935/live" \033[0m"
