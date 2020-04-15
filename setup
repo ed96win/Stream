@@ -31,9 +31,9 @@ clear
 echo "Updating firewall rules.."
 ufw allow $port
 echo -e Your new domain "\e[32m$hostname \033[0mhas been successfully added!"
-Now you can send your OBS RTMP stream to rtmp://$hostname:$port/live
-Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8
-Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
+echo "Now you can send your OBS RTMP stream to rtmp://$hostname:$port/live"
+echo "Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8"
+echo "Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
 echo "================================================================================="
 echo "Brought to you by you by Edwin Ramezanloo"
 else
@@ -48,7 +48,7 @@ sudo apt-get install install zlibc zlib1g zlib1g-dev -y
 sudo apt install libnginx-mod-http-geoip -y
 sudo apt-get install libgeoip-dev -y
 sudo apt install ffmpeg -y
-rm -rf nginx-rtmp-module && rm -rf nginx-1.17.10 && rm -rf zlib-1.2.11 && rm -rf pcre-8.43 
+rm -rf nginx-rtmp-module && rm -rf nginx-1.17.10 && rm -rf zlib-1.2.11 && rm -rf pcre-8.43
 rm nginx-1.17.10.tar.gz && rm zlib-1.2.11.tar.gz && pcre-8.43.tar.gz
 git clone https://github.com/ed96win/nginx-rtmp-module.git
 wget http://nginx.org/download/nginx-1.17.10.tar.gz
