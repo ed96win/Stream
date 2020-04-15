@@ -7,12 +7,12 @@ echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0
 read hostname
 echo "A random port between 1935-5000 will be automatically selected"
 while
-        port=$(shuf -i1935-5000 -n1)
-        netstat -atun | grep -q "$port"
+port=$(shuf -i1935-5000 -n1)
+netstat -atun | grep -q "$port"
 do
-        continue
+continue
 done
-echo "Random port $port is availbe to use! taking.."
+echo "Random port $port is availabe! owning.."
 cd /etc/nginx/conf.d
 cd rtmpconf
 wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
