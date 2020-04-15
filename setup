@@ -1,6 +1,6 @@
 #!/bin/bash
-service nginx status
-if ([ $? = 0 ] && [[ -d "/etc/nginx" ]]); then
+ps cax | grep nginx > /dev/null
+if ([ $? -eq 0 ] && [[ -d "/etc/nginx" ]]); then
 clear
 echo "nginx detected, adding a new domain"
 echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
