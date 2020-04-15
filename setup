@@ -30,7 +30,7 @@ mkdir /etc/nginx/html/$hostname/dash
 clear
 echo "Updating firewall rules.."
 ufw allow $port
-echo "Your new domain $hostname has been successfully added!
+echo -e Your new domain "\e[32m$hostname \033[0mhas been successfully added!"
 Now you can send your OBS RTMP stream to rtmp://$hostname:$port/live
 Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8
 Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
