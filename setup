@@ -91,9 +91,6 @@ mkdir /etc/nginx/geoip
 cd /etc/nginx/geoip
 rm GeoLite2-Country.mmdb
 wget https://github.com/ed96win/Stream/raw/master/GeoLite2-Country.mmdb
-cd ~
-rm -rf *
-rm *
 cd /lib/systemd/system/
 rm nginx.service
 wget https://raw.githubusercontent.com/ed96win/Stream/master/nginx.service
