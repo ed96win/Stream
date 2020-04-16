@@ -43,18 +43,12 @@ echo "==========================================================================
 echo "Brought to you by you by Edwin Ramezanloo"
 else
 clear
-echo "Nginx not found, attempting to install"
+echo "nginx not found, attempting to install"
 echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
 read hostname
 cd ~
 apt update && apt upgrade -y &&
-sudo apt-get install git build-essential libpcre3 libpcre3-dev libssl-dev -y
-sudo apt-get install install zlibc zlib1g zlib1g-dev -y
-sudo apt install libnginx-mod-http-geoip -y
-sudo apt-get install libgeoip-dev -y
-sudo apt install ffmpeg -y
-rm -rf nginx-rtmp-module && rm -rf nginx-1.17.10 && rm -rf zlib-1.2.11 && rm -rf pcre-8.43
-rm nginx-1.17.10.tar.gz && rm zlib-1.2.11.tar.gz && pcre-8.43.tar.gz
+sudo apt-get install git build-essential libpcre3 libpcre3-dev libssl-dev zlibc zlib1g zlib1g-dev libnginx-mod-http-geoip libgeoip-dev ffmpeg -y
 git clone https://github.com/ed96win/nginx-rtmp-module.git
 wget http://nginx.org/download/nginx-1.17.10.tar.gz
 tar -xvf nginx-1.17.10.tar.gz
@@ -76,7 +70,6 @@ cd ~
 cd /usr/src/
 mkdir libmaxminddb
 cd libmaxminddb
-rm libmaxminddb-1.4.2.tar.gz
 wget https://github.com/maxmind/libmaxminddb/releases/download/1.4.2/libmaxminddb-1.4.2.tar.gz
 tar -xvf libmaxminddb-1.4.2.tar.gz libmaxminddb-1.4.2/
 cd libmaxminddb-1.4.2/
@@ -94,7 +87,6 @@ cd nginx-1.17.10
 sudo make && sudo make install
 mkdir /etc/nginx/geoip
 cd /etc/nginx/geoip
-rm GeoLite2-Country.mmdb
 wget https://github.com/ed96win/Stream/raw/master/GeoLite2-Country.mmdb
 cd /lib/systemd/system/
 rm nginx.service
@@ -138,7 +130,6 @@ rm -rf zlib-1.2.11
 rm nginx-1.17.10.tar.gz
 rm pcre-8.43.tar.gz
 rm zlib-1.2.11.tar.gz
-rm nginx
 service nginx restart
 ufw allow 1935
 history -c
