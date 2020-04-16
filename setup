@@ -28,6 +28,7 @@ sed -i s/live.example.com/$hostname/g $hostname.http.conf
 mkdir /etc/nginx/html/$hostname
 mkdir /etc/nginx/html/$hostname/hls
 mkdir /etc/nginx/html/$hostname/dash
+service nginx restart
 clear
 echo "Updating firewall rules.."
 ufw allow $port
