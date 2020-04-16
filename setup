@@ -30,6 +30,7 @@ mkdir /etc/nginx/html/$hostname
 mkdir /etc/nginx/html/$hostname/hls
 mkdir /etc/nginx/html/$hostname/dash
 mkdir /etc/nginx/html/$hostname/archive
+chmod 777 /etc/nginx/html/$hostname/archive
 service nginx restart
 clear
 echo "Updating firewall rules.."
@@ -122,6 +123,7 @@ mkdir /etc/nginx/html/$hostname/
 mkdir /etc/nginx/html/$hostname/hls
 mkdir /etc/nginx/html/$hostname/dash
 mkdir /etc/nginx/html/$hostname/archive
+chmod 777 /etc/nginx/html/$hostname/archive
 cd /usr/bin
 echo "" > nginx.conf
 echo "/etc/nginx/sbin/nginx "'$'"1" > nginx
