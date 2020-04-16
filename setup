@@ -29,6 +29,7 @@ sed -i s/live.example.com/$hostname/g $hostname.http.conf
 mkdir /etc/nginx/html/$hostname
 mkdir /etc/nginx/html/$hostname/hls
 mkdir /etc/nginx/html/$hostname/dash
+mkdir /etc/nginx/html/$hostname/archive
 service nginx restart
 clear
 echo "Updating firewall rules.."
@@ -120,6 +121,7 @@ cd ~
 mkdir /etc/nginx/html/$hostname/
 mkdir /etc/nginx/html/$hostname/hls
 mkdir /etc/nginx/html/$hostname/dash
+mkdir /etc/nginx/html/$hostname/archive
 cd /usr/bin
 echo "" > nginx.conf
 echo "/etc/nginx/sbin/nginx "'$'"1" > nginx
