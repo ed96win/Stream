@@ -6,14 +6,15 @@ clear
 echo "nginx detected, adding a new domain"
 echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0m"
 read hostname
-echo "A random port between 1935-5000 will be automatically selected"
+echo "A free port between 1935-5000 will be automatically selected"
+declare -i port=1935
 while
-port=$(shuf -i1935-5000 -n1)
+port=$port+1
 netstat -atun | grep -q "$port"
 do
 continue
 done
-echo "Random port $port is availabe! owning.."
+echo "Selected port $port is free to use! owning.."
 cd /etc/nginx/conf.d
 cd rtmpconf
 wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
