@@ -40,7 +40,7 @@ echo "Now you can send your OBS RTMP stream to rtmp://$hostname:$port/live"
 echo "Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8"
 echo "Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
 echo "================================================================================="
-echo "Brought to you by you by Edwin Ramezanloo"
+echo "Brought to you by Edwin Ramezanloo"
 else
 clear
 echo "nginx not found, attempting to install"
@@ -139,5 +139,5 @@ Now you can send your OBS RTMP stream to rtmp://$hostname:1935/live
 Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8
 Your DASH output (adaptive quality) will be on http://$hostname/dash/streamkey.mpd"
 echo "================================================================================="
-echo "Brought to you by you by Edwin Ramezanloo"
+echo "Brought to you by Edwin Ramezanloo"
 fi
