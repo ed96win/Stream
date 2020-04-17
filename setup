@@ -14,7 +14,6 @@ netstat -atun | grep -q "$port"
 do
 continue
 done
-echo "Selected port $port is free to use! owning.."
 cd /etc/nginx/conf.d
 cd rtmpconf
 wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
@@ -33,6 +32,7 @@ mkdir /etc/nginx/html/$hostname/archive
 chmod 777 /etc/nginx/html/$hostname/archive
 service nginx restart
 clear
+echo "Selected port $port is free to use! owning.."
 echo "Updating firewall rules.."
 ufw allow $port
 echo -e Your new domain "\e[32m$hostname \033[0mhas been successfully added!"
