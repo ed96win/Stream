@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="//cdn.dashjs.org/v2.6.0/dash.all.min.js"></script>
+
+<script>
+window.onload = function () {
+  var videoTag = document.querySelector("video"),
+      mediaPlayer = dashjs.MediaPlayer().create();
+
+  mediaPlayer.initialize(videoTag, "https://live.edwin.one/dash/stream.mpd");
+};
+</script>
+
+</head>
+<body>
+
+<video controls></video>
+
+</body>
+</html>
