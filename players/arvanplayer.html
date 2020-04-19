@@ -1,0 +1,49 @@
+  <!-- BASE (https://player.arvancloud.com/player) -->
+  <script src="https://player.arvancloud.com/player/base/video.js/7.4.1/alt/video.core.min.js"></script>
+  <link href="https://player.arvancloud.com/player/base/video.js/7.4.1/video-js.min.css" media="screen" rel="stylesheet" />
+
+  <!-- TECH (HLS) -->
+  <script src="https://player.arvancloud.com/player/tech/http-streaming/1.10.3/videojs-http-streaming.min.js"></script>
+
+  <!-- TECH (DASH) -->
+  <script src="https://player.arvancloud.com/player/tech/dash.js/2.9.3/dash.mediaplayer.min.js"></script>
+  <script src="https://player.arvancloud.com/player/tech/videojs-contrib-dash/2.10.1/videojs-dash.min.js"></script>
+
+  <!-- QUALITY (SWITCH) -->
+  <script src="https://player.arvancloud.com/player/plugin/quality/videojs-contrib-quality-levels/2.0.9/videojs-contrib-quality-levels.min.js">
+  </script>
+  <script src="https://player.arvancloud.com/player/plugin/quality/arvan-videojs-quality-selector/1.0.0/arvan-videojs-quality-selector.js"></script>
+
+  <!-- PLUGIN (CONTEXTMENU) -->
+  <script src="https://player.arvancloud.com/player/plugin/contextmenu/videojs-contextmenu/2.0.2/videojs-contextmenu.min.js"></script>
+  <script src="https://player.arvancloud.com/player/plugin/contextmenu/videojs-contextmenu-ui/5.1.0/videojs-contextmenu-ui.min.js"></script>
+
+  <!-- PLUGIN (DVR) -->
+  <script src="https://player.arvancloud.com/player/plugin/dvr/videojs-dvr/1.3.3/videojs-dvr.min.js"></script>
+
+  <!-- PLUGIN (HOTKEY) -->
+  <script src="https://player.arvancloud.com/player/plugin/hotkeys/videojs-hotkeys/0.2.25/videojs.hotkeys.min.js"></script>
+
+  <!-- PLUGIN (LOGO) -->
+  <script src="https://player.arvancloud.com/player/plugin/logo/videojs-logo-overlay/1.0.2/videojs-logo-overlay.js"></script>
+
+  <!-- PLUGIN (SHARE) -->
+  <script src="https://player.arvancloud.com/player/plugin/share/videojs-share/3.0.0/videojs-share.min.js"></script>
+
+  <!-- PLUGIN (THUMBNAILS) -->
+  <script src="https://player.arvancloud.com/player/plugin/thumbnails/videojs-vtt-thumbnails/master/videojs-vtt-thumbnails.js"></script>
+
+  <!-- PLUGIN (TITLEBAR) -->
+  <script src="https://player.arvancloud.com/player/plugin/title/videojs-titleoverlay/master/videojs-titleoverlay.js"></script>
+  
+  <video-js id=vid1 class="vjs-default-skin" data-setup='{"fluid": true}' controls>
+  <source
+     src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+     type="application/x-mpegURL">
+</video-js>
+<script src="video.js"></script>
+<script src="videojs-http-streaming.min.js"></script>
+<script>
+var player = videojs('vid1');
+player.play();
+</script>
