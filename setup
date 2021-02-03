@@ -50,8 +50,8 @@ cd ~
 apt update && apt upgrade -y &&
 sudo apt-get install git build-essential libpcre3 libpcre3-dev libssl-dev zlibc zlib1g zlib1g-dev libnginx-mod-http-geoip libgeoip-dev ffmpeg -y
 git clone https://github.com/ed96win/nginx-rtmp-module.git
-wget http://nginx.org/download/nginx-1.17.10.tar.gz
-tar -xvf nginx-1.17.10.tar.gz
+wget http://nginx.org/download/nginx-1.19.6.tar.gz
+tar -xvf nginx-1.19.6.tar.gz
 cd ~
 wget http://zlib.net/zlib-1.2.11.tar.gz
 tar -xvf zlib-1.2.11.tar.gz
@@ -82,7 +82,7 @@ cd /usr/src/
 git clone https://github.com/ed96win/ngx_http_geoip2_module.git
 cd ~
 git clone https://github.com/ed96win/headers-more-nginx-module.git
-cd nginx-1.17.10
+cd nginx-1.19.6
 ./configure --prefix=/etc/nginx --user=nginx --group=nginx --sbin-path=/etc/nginx/sbin/nginx --conf-path=/etc/nginx/nginx.conf --pid-path=/etc/nginx/logs/nginx.pid --with-pcre=../pcre-8.43 --with-zlib=../zlib-1.2.11 --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --add-module=/usr/src/ngx_http_geoip2_module --add-module=../nginx-rtmp-module --add-module=../headers-more-nginx-module
 sudo make && sudo make install
 mkdir /etc/nginx/geoip
@@ -123,11 +123,11 @@ chmod +x nginx
 sudo adduser nginx --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 cd ~
 rm -rf headers-more-nginx-module
-rm -rf nginx-1.17.10
+rm -rf nginx-1.19.6
 rm -rf nginx-rtmp-module
 rm -rf pcre-8.43
 rm -rf zlib-1.2.11
-rm nginx-1.17.10.tar.gz
+rm nginx-1.19.6.tar.gz
 rm pcre-8.43.tar.gz
 rm zlib-1.2.11.tar.gz
 service nginx restart
