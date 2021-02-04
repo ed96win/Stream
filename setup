@@ -83,7 +83,7 @@ git clone https://github.com/ed96win/ngx_http_geoip2_module.git
 cd ~
 git clone https://github.com/ed96win/headers-more-nginx-module.git
 cd nginx-1.19.6
-./configure --prefix=/etc/nginx --user=nginx --group=nginx --sbin-path=/etc/nginx/sbin/nginx --conf-path=/etc/nginx/nginx.conf --pid-path=/etc/nginx/logs/nginx.pid --with-pcre=../pcre-8.43 --with-zlib=../zlib-1.2.11 --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --add-module=/usr/src/ngx_http_geoip2_module --add-module=../nginx-rtmp-module --add-module=../headers-more-nginx-module
+./configure --prefix=/etc/nginx --user=nginx --group=nginx --sbin-path=/etc/nginx/sbin/nginx --conf-path=/etc/nginx/nginx.conf --pid-path=/etc/nginx/logs/nginx.pid --with-pcre=../pcre-8.43 --with-zlib=../zlib-1.2.11 --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --with-http_v2_module --add-module=/usr/src/ngx_http_geoip2_module --add-module=../nginx-rtmp-module --add-module=../headers-more-nginx-module
 sudo make && sudo make install
 mkdir /etc/nginx/geoip
 cd /etc/nginx/geoip
