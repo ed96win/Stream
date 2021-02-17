@@ -16,13 +16,13 @@ continue
 done
 cd /usr/local/openresty/nginx/conf.d
 cd rtmpconf
-wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
+wget --no-check-certificate https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
 mv live.example.com.rtmp.conf $hostname.rtmp.conf
 sed -i s/live.example.com/$hostname/g $hostname.rtmp.conf
 sed -i s/1935/$port/g $hostname.rtmp.conf
 cd ..
 cd httpconf
-wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
+wget --no-check-certificate https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
 mv live.example.com.http.conf $hostname.http.conf
 sed -i s/live.example.com/$hostname/g $hostname.http.conf
 mkdir /usr/local/openresty/nginx/html/$hostname
@@ -50,36 +50,36 @@ cd ~
 apt update && apt upgrade -y &&
 sudo apt-get install git build-essential libpcre3 libpcre3-dev libssl-dev zlibc zlib1g zlib1g-dev libnginx-mod-http-geoip libgeoip-dev ffmpeg -y
 cd /usr/src
-rm openresty-1.19.3.1.tar.gz
-wget https://openresty.org/download/openresty-1.19.3.1.tar.gz
+#rm openresty-1.19.3.1.tar.gz
+#wget --no-check-certificate https://openresty.org/download/openresty-1.19.3.1.tar.gz
 git clone https://github.com/ed96win/nginx-rtmp-module.git
 git clone https://github.com/leev/ngx_http_geoip2_module.git
 cd openresty-1.19.3.1/
-./configure --pid-path=/usr/local/openresty/nginx/logs/nginx.pid --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --with-http_v2_module --add-module=../ngx_http_geoip2_module --add-module=../nginx-rtmp-module
+./configure --with-openssl=/usr/src/openssl  --with-pcre=/usr/src/pcre  --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --with-http_v2_module --add-module=../ngx_http_geoip2_module --add-module=../nginx-rtmp-module
 sudo make && sudo make install
 cp /usr/local/openresty/bin/openresty /usr/bin/openresty
 mkdir /usr/local/openresty/nginx/geoip
 cd /usr/local/openresty/nginx/geoip
-wget https://github.com/ed96win/Stream/raw/master/GeoLite2-Country.mmdb
+wget --no-check-certificate https://github.com/ed96win/Stream/raw/master/GeoLite2-Country.mmdb
 cd /lib/systemd/system/
 rm openresty.service
-wget https://raw.githubusercontent.com/ed96win/Stream/master/openresty.service
+wget --no-check-certificate https://raw.githubusercontent.com/ed96win/Stream/master/openresty.service
 systemctl daemon-reload
 service openresty stop
 cd /usr/local/openresty/nginx/conf
 rm nginx.conf
-wget https://raw.githubusercontent.com/ed96win/Stream/master/nginx.conf
+wget --no-check-certificate https://raw.githubusercontent.com/ed96win/Stream/master/nginx.conf
 mkdir /usr/local/openresty/nginx/conf.d/
 cd /usr/local/openresty/nginx/conf.d
 mkdir rtmpconf
 mkdir httpconf
 cd rtmpconf
-wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
+wget --no-check-certificate https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.rtmp.conf
 mv live.example.com.rtmp.conf $hostname.rtmp.conf
 sed -i s/live.example.com/$hostname/g $hostname.rtmp.conf
 cd ..
 cd httpconf
-wget https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
+wget --no-check-certificate https://raw.githubusercontent.com/ed96win/Stream/master/live.example.com.http.conf
 mv live.example.com.http.conf $hostname.http.conf
 sed -i s/live.example.com/$hostname/g $hostname.http.conf
 cd ~
@@ -90,10 +90,10 @@ mkdir /usr/local/openresty/nginx/html/$hostname/archive
 chmod 777 /usr/local/openresty/nginx/html/$hostname/archive
 sudo adduser nginx --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 cd ~
-rm -rf openresty-1.19.3.1
-rm -rf nginx-rtmp-module
-rm rf ngx_http_geoip2_module
-rm nginx-1.19.6.tar.gz
+#rm -rf openresty-1.19.3.1
+#rm -rf nginx-rtmp-module
+#rm rf ngx_http_geoip2_module
+#rm nginx-1.19.6.tar.gz
 service openresty restart
 ufw allow 1935
 history -c
