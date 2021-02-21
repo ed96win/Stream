@@ -48,6 +48,7 @@ echo -e "\e[32m"'Give me the hostname (for example: live.mizban.cloud)'"? \033[0
 read hostname
 cd ~
 apt update && apt upgrade -y &&
+sudo apt -y install autoconf automake build-essential cmake git-core libass-dev libfreetype6-dev libgnutls28-dev libsdl2-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev meson ninja-build pkg-config texinfo wget yasm zlib1g-dev
 sudo apt-get install git build-essential libpcre3 libpcre3-dev libssl-dev zlibc zlib1g zlib1g-dev libnginx-mod-http-geoip libgeoip-dev ffmpeg -y
 cd /usr/src
 #rm openresty-1.19.3.1.tar.gz
