@@ -50,17 +50,26 @@ cd ~
 apt update && apt upgrade -y &&
 sudo apt -y install autoconf automake build-essential cmake git-core libass-dev libfreetype6-dev libgnutls28-dev libsdl2-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev meson ninja-build pkg-config texinfo wget yasm zlib1g-dev
 sudo apt-get install git build-essential libpcre3 libpcre3-dev libssl-dev zlibc zlib1g zlib1g-dev libnginx-mod-http-geoip libgeoip-dev ffmpeg -y
+apt install libmaxminddb0 libmaxminddb-dev mmdb-bin geoipupdate -y
+apt install libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev -y
 cd /usr/src
-#rm openresty-1.19.3.1.tar.gz
-#wget --no-check-certificate https://openresty.org/download/openresty-1.19.3.1.tar.gz
+rm openresty-1.19.3.1.tar.gz
+wget --no-check-certificate https://openresty.org/download/openresty-1.19.3.1.tar.gz
 git clone https://github.com/ed96win/nginx-rtmp-module.git
 git clone https://github.com/leev/ngx_http_geoip2_module.git
 cd openresty-1.19.3.1/
-./configure --with-openssl=/usr/src/openssl  --with-pcre=/usr/src/pcre  --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --with-http_v2_module --add-module=../ngx_http_geoip2_module --add-module=../nginx-rtmp-module
-sudo make && sudo make install
+./configure -j32 --with-debug --with-threads --with-stream_ssl_module --with-stream --with-http_realip_module --with-http_ssl_module --with-http_flv_module --with-http_geoip_module --with-http_v2_module --add-module=../ngx_http_geoip2_module --add-module=../nginx-rtmp-module
+sudo make -j32
+sudo make install -j32
+mkdir /usr/local/openresty/nginx/html/$hostname/
+mkdir /usr/local/openresty/nginx/html/$hostname/hls
+mkdir /usr/local/openresty/nginx/html/$hostname/dash
+mkdir /usr/local/openresty/nginx/html/$hostname/archive
+chmod 777 /usr/local/openresty/nginx/html/$hostname/archive
 cp /usr/local/openresty/bin/openresty /usr/bin/openresty
 mkdir /usr/local/openresty/nginx/geoip
 cd /usr/local/openresty/nginx/geoip
+rm GeoLite2-Country.mmdb
 wget --no-check-certificate https://github.com/ed96win/Stream/raw/master/GeoLite2-Country.mmdb
 cd /lib/systemd/system/
 rm openresty.service
@@ -84,21 +93,13 @@ wget --no-check-certificate https://raw.githubusercontent.com/ed96win/Stream/mas
 mv live.example.com.http.conf $hostname.http.conf
 sed -i s/live.example.com/$hostname/g $hostname.http.conf
 cd ~
-mkdir /usr/local/openresty/nginx/html/$hostname/
-mkdir /usr/local/openresty/nginx/html/$hostname/hls
-mkdir /usr/local/openresty/nginx/html/$hostname/dash
-mkdir /usr/local/openresty/nginx/html/$hostname/archive
-chmod 777 /usr/local/openresty/nginx/html/$hostname/archive
 sudo adduser nginx --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 cd ~
 #rm -rf openresty-1.19.3.1
 #rm -rf nginx-rtmp-module
 #rm rf ngx_http_geoip2_module
-#rm nginx-1.19.6.tar.gz
 service openresty restart
 ufw allow 1935
-history -c
-clear
 echo "OpenResty/NginX (with rtmp module and ffmpeg) has been installed successfully.
 Now you can send your OBS RTMP stream to rtmp://$hostname:1935/live
 Your HLS output (adaptive quality) will be on http://$hostname/hls/streamkey.m3u8
