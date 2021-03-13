@@ -1,0 +1,5 @@
+git clone https://github.com/gpac/gpac.git
+cd gpac
+./configure --disable-opengl --use-js=no --use-ft=no --use-jpeg=no --use-png=no --use-faad=no --use-mad=no --use-xvid=no --use-ffmpeg=no --use-ogg=no --use-vorbis=no --use-theora=no --use-openjpeg=no
+make -j32
+make install -j32
