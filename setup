@@ -100,6 +100,7 @@ cd ~
 #rm -rf nginx-rtmp-module
 #rm rf ngx_http_geoip2_module
 service openresty restart
+systemctl enable openresty
 ufw allow 1935
 echo "OpenResty/NginX (with rtmp module and ffmpeg) has been installed successfully.
 Now you can send your OBS RTMP stream to rtmp://$hostname:1935/live
